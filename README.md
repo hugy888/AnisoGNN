@@ -7,7 +7,7 @@ pip install -r requirements.txt
 ```
 
 ## HDF5 Files
-Grain IDs, euler angles for each grain and the mechanical property of RVEs are stored in Ni_raw_data.hdf5 and Al_raw_data.hdf5. First layer: 12 textures; Second layer: 25 RVEs and prop arrays of E_modulus and yield_strength per texture; Third layer: Grain IDs and euler angles for each RVEs. 
+Grain IDs, euler angles for each grain and the mechanical property of RVEs are stored in Ni_raw_data.hdf5 and Al_raw_data.hdf5. First layer: 12 textures; Second layer: 25 RVEs and prop arrays of E_modulus and yield_strength per texture; Third layer: Grain IDs and euler angles for each RVE. 
 
 ## Prepare Data
 Create PyTorch datalists for graphs and RVE mechanical properties.
