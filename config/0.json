@@ -1,0 +1,15 @@
+{
+    "l_rate": 0.001,
+    "w_decay": 0.00001,
+    "n_epoch_SAGE": 600,
+    "n_epoch_Aniso": 800,
+    "b_size": 16,
+    "N_fl1": 32,
+    "N_mpl": 64,
+    "N_fl2": 64,
+    "N_fl3": 16,
+    "N_C": 22,
+    "N_C_fl": 6,
+    "N_S": 109,
+    "N_S_fl": 19
+}
