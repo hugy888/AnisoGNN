@@ -11,9 +11,9 @@ pip install -r requirements.txt
 Grain IDs, euler angles for each grain and the mechanical property of RVEs are stored in Ni_raw_data.hdf5 and Al_raw_data.hdf5. 
 
 First layer: 12 textures
-  Uniaxial Compression (0/45/90 degrees rotations)
-  Uniaxial Tension (0/45/90 degrees rotations)
-  Plane Strain Compression (0/45/90 degrees rotations)
+  Uniaxial Compression (0/45/90 degrees rotations),
+  Uniaxial Tension (0/45/90 degrees rotations),
+  Plane Strain Compression (0/45/90 degrees rotations),
   Simple Shear (0/45/90 degrees rotations)
 
 Second layer: 25 RVEs per texture and arrays storing E_modulus and yield_strength of RVEs; 
