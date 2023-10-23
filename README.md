@@ -8,10 +8,20 @@ pip install -r requirements.txt
 ```
 
 ## HDF5 Files
-Grain IDs, euler angles for each grain and the mechanical property of RVEs are stored in Ni_raw_data.hdf5 and Al_raw_data.hdf5. First layer: 12 textures; Second layer: 25 RVEs and prop arrays of E_modulus and yield_strength per texture; Third layer: Grain IDs and euler angles for each RVE. 
+Grain IDs, euler angles for each grain and the mechanical property of RVEs are stored in Ni_raw_data.hdf5 and Al_raw_data.hdf5. 
+
+First layer: 12 textures, including
+  Uniaxial Compression (0/45/90 degrees rotations),
+  Uniaxial Tension (0/45/90 degrees rotations),
+  Plane Strain Compression (0/45/90 degrees rotations),
+  Simple Shear (0/45/90 degrees rotations);
+
+Second layer: 25 RVEs per texture and arrays storing E_modulus and yield_strength of RVEs; 
+
+Third layer: Grain IDs and euler angles from each RVE. 
 
 ## Prepare Data
-Create PyTorch datalists for graphs and RVE mechanical properties.
+PyTorch datalists for graphs and RVE mechanical properties have been created as pickle files and saved in graph_data folder. The method to create those pickle files:
 ```bash
 python write_data.py
 ```
@@ -25,7 +35,12 @@ The different cases presented in the original paper are:
   5. O-SAGE_Al_YS
   6. S-Aniso_Al_YS
   
-For each evaluation, loss histories, parity plots, and model checkpoints are outputted.
+For each case, four evaluations are performed and loss histories, parity plots, and model checkpoints are outputted.
+Four evaluations:
+  1. test_45_90_deg
+  2. test_45_deg
+  3. test_ran_30%
+  4. test_90_deg
 
 ```
 Usage: python model.py [OPTIONS]
