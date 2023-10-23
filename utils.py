@@ -1,10 +1,12 @@
 import pickle
 import random
 
+import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 import torch
 from torch_geometric.loader import DataLoader
-import matplotlib.pyplot as plt
+
 
 def mean_maxARE(y_pred, y_true):
     '''Calcuate Mean, MaxARE
@@ -108,3 +110,103 @@ def scalers(case):
     scaler['y'] = y_scaler
     scaler['x'] = x_scaler
     return scaler
+
+def plot_results(preds, trues, case, eval, preds_test, trues_test, output_type,output_dir):
+    '''Plot evaluation results
+    '''
+    if case.split('_')[-1]=='YS':
+        trues_plot=trues_test/1e6
+        preds_plot=preds_test/1e6
+        trues_train=trues/1e6
+        preds_train=preds/1e6
+    else:
+        trues_plot=trues_test/1e9
+        preds_plot=preds_test/1e9
+        trues_train=trues/1e9
+        preds_train=preds/1e9
+    fname=f"{output_dir}/{case}_{eval}"
+    sns.set(font_scale=1.75)
+    sns.set_style("ticks")
+    fig, ax = plt.subplots(figsize=(8.5, 5.5), dpi=300)
+    plt.scatter(trues_train,preds_train,s=50,color='gray', alpha=0.6,edgecolors='None')
+    if eval=='test_45_90_deg':
+        plt.scatter(trues_plot[:25],preds_plot[:25],s=150,color='#52B5F9', label ='Compression 45',alpha=0.7,marker="^")
+        plt.scatter(trues_plot[25:50],preds_plot[25:50],s=150,color='#DF873E', label ='Tension 45',alpha=0.7,marker="^")
+        plt.scatter(trues_plot[50:75],preds_plot[50:75],s=150,color='#69E374', label ='Shear 45',alpha=0.7,marker="^")
+        plt.scatter(trues_plot[75:100],preds_plot[75:100],s=150,color='#EA334B', label ='PSC 45',alpha=0.7,marker="^")
+    
+        plt.scatter(trues_plot[100:125],preds_plot[100:125],s=150,color='#52B5F9', label ='Compression 90',alpha=0.7,marker="+")
+        plt.scatter(trues_plot[125:150],preds_plot[125:150],s=150,color='#DF873E', label ='Tension 90',alpha=0.7,marker="+")
+        plt.scatter(trues_plot[150:175],preds_plot[150:175],s=150,color='#69E374', label ='Shear 90',alpha=0.7,marker="+")
+        plt.scatter(trues_plot[175:],preds_plot[175:],s=150,color='#EA334B', label ='PSC 90',alpha=0.7,marker="+")
+    elif eval=='test_45_deg':
+        plt.scatter(trues_plot[:25],preds_plot[:25],s=150,color='#52B5F9', label ='Compression 45',alpha=0.7,marker="^")
+        plt.scatter(trues_plot[25:50],preds_plot[25:50],s=150,color='#DF873E', label ='Tension 45',alpha=0.7,marker="^")
+        plt.scatter(trues_plot[50:75],preds_plot[50:75],s=150,color='#69E374', label ='Shear 45',alpha=0.7,marker="^")
+        plt.scatter(trues_plot[75:],preds_plot[75:],s=150,color='#EA334B', label ='PSC 45',alpha=0.7,marker="^")
+    elif eval=='test_90_deg':
+        plt.scatter(trues_plot[:25],preds_plot[:25],s=150,color='#52B5F9', label ='Compression 90',alpha=0.7,marker="+")
+        plt.scatter(trues_plot[25:50],preds_plot[25:50],s=150,color='#DF873E', label ='Tension 90',alpha=0.7,marker="+")
+        plt.scatter(trues_plot[50:75],preds_plot[50:75],s=150,color='#69E374', label ='Shear 90',alpha=0.7,marker="+")
+        plt.scatter(trues_plot[75:],preds_plot[75:],s=150,color='#EA334B', label ='PSC 90',alpha=0.7,marker="+")
+    elif eval=='test_ran_30%':
+        np.random.seed(42)
+        rand_ids = np.random.choice(300, 300, replace=False)
+        for i in range(90):
+            if rand_ids[i] in range(300)[:25]:
+                p1=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#52B5F9',alpha=0.7, label ='Compression')
+            if rand_ids[i] in range(300)[25:50]:
+                p2=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#DF873E',alpha=0.7, label ='Tension')
+            if rand_ids[i] in range(300)[50:75]:
+                p3=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#69E374',alpha=0.7, label ='Shear')
+            if rand_ids[i] in range(300)[75:100]:
+                p4=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#EA334B',alpha=0.7, label ='PSC')
+            if rand_ids[i] in range(300)[100:125]:
+                p5=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#52B5F9',alpha=0.7, label ='Compression 90',marker="+")
+            if rand_ids[i] in range(300)[125:150]:
+                p6=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#DF873E',alpha=0.7, label ='Tension 90',marker="+")
+            if rand_ids[i] in range(300)[150:175]:
+                p7=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#69E374',alpha=0.7, label ='Shear 90',marker="+")
+            if rand_ids[i] in range(300)[175:200]:
+                p8=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#EA334B',alpha=0.7, label ='PSC 90',marker="+")
+            if rand_ids[i] in range(300)[200:225]:
+                p9=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#52B5F9',alpha=0.7, label ='Compression 45',marker="^")
+            if rand_ids[i] in range(300)[225:250]:
+                p10=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#DF873E',alpha=0.7, label ='Tension 45',marker="^")
+            if rand_ids[i] in range(300)[250:275]:
+                p11=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#69E374',alpha=0.7, label ='Shear 45',marker="^")
+            if rand_ids[i] in range(300)[275:]:
+                p12=ax.scatter(trues_plot[i],preds_plot[i],s=150,color='#EA334B',alpha=0.7, label ='PSC 45',marker="^")
+        # l = ax.legend([p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12], 
+        #       ['Compression', 'Tension','Shear','PSC','Compression 90','Tension 90','Shear 90','PSC 90','Compression 45','Tension 45','Shear 45','PSC 45'],
+        #       loc ="lower right",fontsize=10)
+    if case.split('_')[2] == 'YS':
+        plt.xlabel('True strength (MPa)')
+        plt.ylabel('Predicted strength (MPa)')
+        plt.xlim([74, 90])
+        plt.ylim([74, 90])
+        plt.xticks(np.arange(75, 95, 5))
+        plt.yticks(np.arange(75, 95, 5))
+        plt.plot([74, 90], [74, 90], 'gray', linewidth=1, zorder=1)
+    elif case.split('_')[1]=='Ni':
+        plt.xlabel('True modulus (GPa)')
+        plt.ylabel('Predicted modulus (GPa)')
+        plt.xlim([200, 280])
+        plt.ylim([200, 280])
+        plt.xticks(np.arange(200, 300, 20))
+        plt.yticks(np.arange(200, 300, 20))
+        plt.plot([200, 280], [200, 280], 'gray', linewidth=1, zorder=1)
+    else:
+        plt.xlabel('True modulus (GPa)')
+        plt.ylabel('Predicted modulus (GPa)')
+        plt.xlim([75, 82])
+        plt.ylim([75, 82])
+        plt.xticks(np.arange(76, 84, 2))
+        plt.yticks(np.arange(76, 84, 2))
+        plt.plot([75, 82], [75, 82], 'gray', linewidth=1, zorder=1)
+        
+    ax.set_aspect(1.0/ax.get_data_ratio(), adjustable='box')
+    if output_type == 'png':
+        plt.savefig(fname, dpi=300, bbox_inches="tight")
+    if output_type == 'svg':
+        plt.savefig(fname+".svg", dpi=300, bbox_inches="tight")

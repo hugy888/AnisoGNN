@@ -39,7 +39,6 @@ textures = ['comp','uni','shear','psc','comp_rot_z-90','uni_rot_z-90','shear_rot
 for case in tqdm(cases):
     prop_data = np.empty((0, 1))
     graph = case[0]+"-"+case.split("_")[1]
-    print(graph)
     if case[0] == "O":
         feature_data = torch.zeros((0, 5))
     elif case[0] == "C":
