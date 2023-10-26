@@ -4,6 +4,7 @@
 Install dependencies. Please check these links to install [PyTorch](https://pytorch.org/get-started/locally/) and [PyTorchGeometric](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html).
 ```bash
 conda create --name Aniso python=3.9
+conda activate Aniso
 pip install -r requirements.txt
 ```
 
