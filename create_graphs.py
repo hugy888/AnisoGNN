@@ -4,6 +4,19 @@ from tqdm import tqdm
 import h5py
 from utils import *
 
+"""
+This script reads data from HDF5 files containing grain orientations, 'C_tensor', and IDs for Nickel (Ni) and Aluminum (Al).
+It then processes the data to create graphs representing grains and their properties using the NetworkX library.
+
+For each texture and microstructural volume element (MVE), the script:
+1. Extracts grain orientation, 'C_tensor', and grain ID data.
+2. Uses neighboring grain data to structure the graphs.
+3. Constructs graphs using grain features and neighboring information.
+4. Saves the graphs into different directories based on the element and texture.
+
+The graphs provide a structured representation of the material's microstructure, which can be further analyzed or visualized.
+"""
+
 n_MVEs = 25
 Ni_raw_data = h5py.File('Ni_data.hdf5', mode='r')
 Al_raw_data = h5py.File('Al_data.hdf5', mode='r')

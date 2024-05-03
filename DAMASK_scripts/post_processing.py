@@ -46,8 +46,10 @@ foldername=os.path.basename(cwd)
 
 all=[epsilon_ave]+[sigma_ave]
 
+# if Al, yield strength is obtained from the third increment (inc)
 np.savetxt(foldername+'_out_sig_epi.txt',all)
 
+# calculate Young's modulus at the second increment (inc)
 modulus=(sigma_ave[1]-sigma_ave[0])/(epsilon_ave[1]-epsilon_ave[0])
 print('modulus: '+str(modulus))
 

@@ -1,3 +1,9 @@
+%This script processes stiffness tensors for different textures and microstructural volume elements (MVEs). The key steps include:
+
+%Defining the stiffness tensor matrix and specifying the crystal symmetry for cubic crystals.
+%Iterating through a list of textures to set up file paths for saving data.
+%For each MVE, importing grain orientation data, aligning the stiffness tensor to the grain orientations, and saving the processed tensor data for further analysis.
+n_MVEs= 25;
 M = [[267.1e+9   170.5e+9  170.5e+9   0     0     0];...
     [  170.5e+9  267.1e+9  170.5e+9   0     0     0];...
     [  170.5e+9   170.5e+9 267.1e+9   0     0     0];...
@@ -18,7 +24,7 @@ for i =1:length(textures)
     tex=textures(i);
     class_name=sprintf("equi_%s", tex);
     path_dream3d="path_to_save/"+class_name+"/";
-    for j =1:25
+    for j =1:n_MVEs
         newpath=path_dream3d+sprintf(class_name+"_%02d/", j);
         ori_txt = newpath+sprintf(class_name+"_%02d.txt",j); % orientation data import
 
