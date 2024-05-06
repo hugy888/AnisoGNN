@@ -1,10 +1,15 @@
 %startup_mtex
+% This script processes texture data to assign orientations to grains in synthetic microstructures.
 
-%This script computes and processes the stiffness tensor for different microstructural volume elements (MVEs) based on orientation data. The script:
+% Key Steps:
+% 1. Defines paths to input ODF data and initializes texture types and the number of MVEs.
+% 2. Iterates over each texture type to set up the file paths for saving results.
+% 3. Loads orientation distribution function (ODF) data from .mat files.
+% 4. For each MVE, reads the number of grains from the .dream3d files.
+% 5. Uses the ODF to sample orientations for the specified number of grains.
+% 6. Saves the assigned orientations to .txt files for further analysis.
 
-%Defines the stiffness tensor matrix and crystal symmetry for cubic materials.
-%Iterates through different texture types, generating file paths for saving data.
-%Reads orientation data from input files, applies rotations to align the stiffness tensor with each grain's orientation, and saves the rotated tensor data for further analysis.
+% The script helps in generating synthetic microstructures with specific texture properties.
 
 path_odf="./textures/";
 textures = ["comp","uni","shear","psc"];
