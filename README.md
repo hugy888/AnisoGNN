@@ -9,15 +9,22 @@ pip install -r requirements.txt
 ```
 ## Dream3D scripts
 run_equi.py: generate 25 MVEs as dream3d files based on equiaxed.json for each texture.
+
 run_equi.m: create orientation data (in euler angles) as txt files based on ODF data of each texture.
+
 yaml_gen.py: generate material.yaml for DAMASK analysis and create orientation data (in quaternions).
+
 grain_ids.m: generate grain ids as numpy array.
+
 C_tensor.m: create elasticity stiffness tensor and save 21 elements in txt files.
+
 S_tensor.m: create Schmid tensor and save 108 elements in txt files.
 
 ## DAMASK scripts
 tensionX_Al.yaml: loading file for Al, including 3 increments, elasticity deformation at the 2nd increment, yield point at the 3rd increment.
+
 tensionX_Ni.yaml: loading file for Ni, including 2 increments, elasticity deformation at the 2nd increment.
+
 post_processing.py: analyze DAMASK output hdf5 files and collect Young's modulus from the 2nd increment and yield strength from the 3rd increment
 
 ## HDF5 Files
