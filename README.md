@@ -16,9 +16,9 @@ yaml_gen.py: generate material.yaml for DAMASK analysis and create orientation d
 
 grain_ids.m: generate grain ids as numpy array.
 
-C_tensor.m: create elasticity stiffness tensor and save 21 elements in txt files.
+C_tensor.m: create elasticity stiffness tensors and save 21 elements in txt files.
 
-S_tensor.m: create Schmid tensor and save 108 elements in txt files.
+S_tensor.m: create Schmid tensors and save 108 elements in txt files.
 
 ## DAMASK scripts
 tensionX_Al.yaml: loading file for Al, including 3 increments, elasticity deformation at the 2nd increment, yield point at the 3rd increment.
