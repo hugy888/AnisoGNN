@@ -41,7 +41,7 @@ Second layer: 25 MVEs per texture and arrays storing E_modulus and yield_strengt
 Third layer: Grain IDs, euler angles, quaternions, C-tensor, S-tensor of each grain from each MVE. 
 
 ## Create Graphs
-Microstructure graphs for all 300 MVEs have already been created in the graphs folder. The method to create those graph files (this process may take long time ~20h on regular CPU, multi-processing is recommended):
+Microstructure graphs for all 300 MVEs have already been created in the graphs folder. The method to create those graph files (this process may take more than 20h on regular CPU, multi-processing is recommended):
 ```bash
 python create_graphs.py
 ```
