@@ -7,7 +7,7 @@
 n_MVEs= 25;
 cs = crystalSymmetry('m-3m');
 sSAll = load("sSAll.mat").sSAll;
-
+ST = SchmidTensor(sSAll);
 textures = ["comp","uni","shear","psc"];
 for i =1:length(textures)
     tex=textures(i);
